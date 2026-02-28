@@ -33,7 +33,9 @@ export default function Home() {
               </button>
 
               {menuOpen && (
+              
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                  { /* For future expansion, you can add more menu items here*/ }
                   <Link
                     href="/Event/Create"
                     className="block px-4 py-3 hover:bg-gray-100 transition-colors"
@@ -45,6 +47,19 @@ export default function Home() {
                     className="block px-4 py-3 hover:bg-gray-100 transition-colors"
                   >
                     View My Events
+                  </Link>
+                  
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Edit Profile
+                  </Link>
+                   <Link
+                    href="/signout"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Sign Out
                   </Link>
                 </div>
               )}
