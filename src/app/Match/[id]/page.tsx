@@ -25,7 +25,7 @@ export default function FindMatches() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl mb-4">Event not found</h2>
+          <h2 className="text-2xl mb-2">Event not found</h2>
           <Link href="/" className="text-primary hover:underline">
             Go back to events
           </Link>
@@ -56,7 +56,7 @@ export default function FindMatches() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-secondary px-6 py-6 shadow-lg">
+      <header className="bg-gradient-to-r from-primary to-secondary px-2 py-2 shadow-lg">
         <div className="max-w-4xl mx-auto">
           <Link
             href={`/Event/${id}`}
@@ -66,11 +66,10 @@ export default function FindMatches() {
             Back to Event
           </Link>
           <h1 className="text-3xl mb-2">Find Your Event Buddies</h1>
-          <p className="opacity-90">Match with people attending {event.title}</p>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-4">
         {/* Progress */}
         {hasMatches && !isComplete && (
           <div className="mb-8">
@@ -93,18 +92,18 @@ export default function FindMatches() {
 
         {/* Match Card */}
         {!isComplete && hasMatches && currentMatch && (
-          <div className="bg-card rounded-2xl shadow-2xl overflow-hidden border border-border max-w-2xl mx-auto">
-            <div className="aspect-square bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
+          <div className="bg-card outline outline-2 outline-primary rounded-2xl shadow-2xl overflow-hidden border border-border max-w-2xl mx-auto">
+            <div className="w-full h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-6">
               <img
                 src={currentMatch.user.avatar}
                 alt={currentMatch.user.name}
-                className="w-64 h-64 rounded-full object-cover border-8 border-white shadow-xl"
+                className="w-48 h-48 rounded-full object-cover border-8 border-white shadow-xl outline outline-2 outline-primary"
               />
             </div>
             
-            <div className="p-8">
+            <div className="p-4">
               {/* Match Score */}
-              <div className="flex items-center justify-center gap-2 mb-6">
+              <div className="flex items-center justify-center gap-2 mb-3">
                 <Sparkles className="w-5 h-5 text-secondary" />
                 <span className="text-lg">
                   {currentMatch.score}% Match
@@ -117,7 +116,7 @@ export default function FindMatches() {
 
               {/* Common Interests */}
               {currentMatch.commonInterests.length > 0 && (
-                <div className="mb-6 p-4 bg-accent/30 rounded-lg">
+                <div className="mb-6 p-4 bg-accent rounded-lg">
                   <div className="flex items-center gap-2 mb-3">
                     <Heart className="w-5 h-5 text-secondary" />
                     <h3 className="font-medium">Common Interests</h3>
