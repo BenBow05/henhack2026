@@ -29,7 +29,7 @@ export default function Home() {
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
               >
-                <Menu className="w-6 h-6 text-white" />
+                <Menu className="w-8 h-8 text-white" />
               </button>
 
               {menuOpen && (
@@ -43,7 +43,7 @@ export default function Home() {
                     Create New Event
                   </Link>
                   <Link
-                    href="/profile"
+                    href="/Event/Personal"
                     className="block px-4 py-3 hover:bg-gray-100 transition-colors"
                   >
                     View My Events
