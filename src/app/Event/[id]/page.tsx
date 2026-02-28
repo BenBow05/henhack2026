@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { useEvents } from "../../../components/context/EventContext";
 import { ArrowLeft, Calendar, MapPin, Users, Heart, UserPlus } from "lucide-react";
-import { use } from "react";
 
 export default function EventDetails() {
   const params = useParams<{ id: string }>();
@@ -48,7 +47,7 @@ export default function EventDetails() {
 
       {/* Event Details */}
       <main className="max-w-5xl mx-auto px-6 py-12">
-        <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
+        <div className="bg-card outline outline-2 outline-primary rounded-xl shadow-lg overflow-hidden border border-border">
           {/* Event Image */}
           <div className="aspect-[21/9] bg-muted">
             <img

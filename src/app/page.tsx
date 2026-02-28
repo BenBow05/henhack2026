@@ -9,12 +9,12 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-[#299963] px-4 py-8 shadow-lg">
+      <header className="bg-gradient-to-r from-primary to-[90%] to-secondary px-4 py-8 shadow-lg">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Sparkles className="w-8 h-8" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-[80%] to-secondary to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-white to-secondary to-[50%] to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
             </div>
             <Link
               href="/Event/Create"
@@ -40,7 +40,7 @@ export default function Home() {
             <Link
               key={event.id}
               href={`/Event/${event.id}`}
-              className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border"
+              className="group bg-card outline outline-2 outline-primary rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border"
             >
               <div className="aspect-video bg-muted overflow-hidden">
                 <img

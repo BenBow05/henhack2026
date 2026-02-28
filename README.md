@@ -6,11 +6,11 @@
 
 ## Set Up:
 - npm I
-- npm install @radix-ui/themes
 - npm install lucide-react
 - npm install tailwindcss
 - npm install sonner
 - npm install next-themes
+- npm install -g json-server
 ## Tech Stack:
 - Typescript
 - Next.js

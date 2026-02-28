@@ -37,7 +37,8 @@ export default function CreateEvent() {
       maxAttendees: parseInt(formData.maxAttendees),
     };
 
-    addEvent(newEvent);
+    // THIS NEEDEDS TO BE FIXED WITH DAVENS NEW OBJS
+    // addEvent(newEvent);
     navigate.push(`/event/${newEvent.id}`);
   };
 
@@ -63,7 +64,7 @@ export default function CreateEvent() {
 
       {/* Form */}
       <main className="max-w-3xl mx-auto px-6 py-12">
-        <form onSubmit={handleSubmit} className="bg-card rounded-xl shadow-lg p-8 border border-border">
+        <form onSubmit={handleSubmit} className="bg-card outline outline-2 outline-primary rounded-xl shadow-lg p-8 border border-border">
           <div className="space-y-6">
             {/* Title */}
             <div>
