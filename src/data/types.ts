@@ -8,7 +8,7 @@ export interface Event {
   address: string;
   category: string;
   image: string;
-  attendees: string[];
+  attendees: string[]; // id of users
   maxAttendees: number;
   organizer: string
 }
@@ -22,6 +22,7 @@ export interface User {
   gender: string;
   personality: string; 
   language: string
+  events: string[] // ids for events being attended
 }
 
 export interface Match {
@@ -29,12 +30,4 @@ export interface Match {
   score: number;
   commonInterests: string[];
   isAttending: boolean;
-}
-
-export interface UPref{
-  gender: string //gender a user wants to get matched with 
-  ageMin: number //minimum age for user prefs
-  ageMax: number //age max a user prefers
-  language: string //spoken language
-  personality: string //introvert / extrovert etc.
 }
