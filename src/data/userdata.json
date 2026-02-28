@@ -1,0 +1,13 @@
+[
+  {
+    "id": "user_001",
+    "name": "Alex Rivera",
+    "avatar": "/avatars/alex.jpg",
+    "interests": ["Live Music", "Networking", "Startups", "Photography"],
+    "bio": "Tech enthusiast who loves concerts and meeting new people at events.",
+    "gender": "Male",
+    "personality": "Outgoing",
+    "language": "English",
+    "events": ["event_001"]
+  }
+]

@@ -5,10 +5,12 @@ export interface Event {
   date: string;
   time: string;
   location: string;
+  address: string;
   category: string;
   image: string;
-  attendees: string[];
+  attendees: string[]; // id of users
   maxAttendees: number;
+  organizer: string
 }
 
 export interface User {
@@ -17,6 +19,10 @@ export interface User {
   avatar: string;
   interests: string[];
   bio: string;
+  gender: string;
+  personality: string; 
+  language: string
+  events: string[] // ids for events being attended
 }
 
 export interface Match {
