@@ -1,30 +1,59 @@
 "use client"
+import { useState } from "react";
 import { useEvents } from "../components/context/EventContext";
 import Link from "next/link";
-import { Calendar, MapPin, Users, Plus, Sparkles } from "lucide-react";
+import { Calendar, MapPin, Users, Sparkles, Menu } from "lucide-react";
 
 export default function Home() {
   const { events } = useEvents();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="bg-[#299963] px-4 py-8 shadow-lg">
+      <header className="bg-[#299963] px-4 py-8 shadow-lg relative">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-4">
+            
+            {/* Logo */}
             <div className="flex items-center gap-3">
-              <Sparkles className="w-8 h-8" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-[80%] to-secondary to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
+              <Sparkles className="w-8 h-8 text-white" />
+              <h1 className="text-3xl font-bold text-white">
+                Gatherly
+              </h1>
             </div>
-            <Link
-              href="/Event/Create"
-              className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
-            >
-              <Plus className="w-5 h-5" />
-              Create Event
-            </Link>
+
+            {/* Hamburger Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+              >
+                <Menu className="w-6 h-6 text-white" />
+              </button>
+
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                  <Link
+                    href="/Event/Create"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Create New Event
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    View My Events
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-          <p className="text-lg opacity-90">Discover events, meet amazing people</p>
+
+          <p className="text-lg text-white opacity-90">
+            Discover events, meet amazing people
+          </p>
         </div>
       </header>
 
