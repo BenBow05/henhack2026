@@ -23,6 +23,7 @@ export interface User {
   personality: string; 
   language: string
   events: string[] // ids for events being attended
+  location: string
 }
 
 export interface Match {
