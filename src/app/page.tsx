@@ -17,7 +17,7 @@ export default function Home() {
               <h1 className="text-3xl">Gatherly</h1>
             </div>
             <Link
-              href="/create"
+              href="/Event/Create"
               className="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors"
             >
               <Plus className="w-5 h-5" />
@@ -39,7 +39,7 @@ export default function Home() {
           {events.map((event) => (
             <Link
               key={event.id}
-              href={`/event/${event.id}`}
+              href={`/Event/${event.id}`}
               className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border"
             >
               <div className="aspect-video bg-muted overflow-hidden">
