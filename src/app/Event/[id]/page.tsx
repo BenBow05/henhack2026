@@ -36,7 +36,7 @@ export default function EventDetails() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-secondary px-6 py-6 shadow-lg">
+      <header className="bg-gradient-to-r from-primary to-secondary px-6 py-4 shadow-lg">
         <div className="max-w-5xl mx-auto">
           <Link href="/" className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
             <ArrowLeft className="w-5 h-5" />

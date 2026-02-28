@@ -20,6 +20,48 @@ export default function Home() {
               <Sparkles className="w-8 h-8" />
               <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-white to-secondary to-[50%] to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
             </div>
+
+          {/* Hamburger Menu */}
+            <div className="relative">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+              >
+                <Menu className="w-6 h-6 text-white" />
+              </button>
+
+              {menuOpen && (
+              
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                  { /* For future expansion, you can add more menu items here*/ }
+                  <Link
+                    href="/Event/Create"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Create New Event
+                  </Link>
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    View My Events
+                  </Link>
+                  
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Edit Profile
+                  </Link>
+                   <Link
+                    href="/signout"
+                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+                  >
+                    Sign Out
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
 
           <p className="text-lg text-white opacity-90">
