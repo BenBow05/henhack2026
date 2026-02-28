@@ -5,20 +5,20 @@
 ## Goal:
 
 ## Set Up:
-npm I
-npm install @radix-ui/themes
-npm install lucide-react
-npm install tailwindcss
-npm install sonner
-npm install next-themes
+- npm I
+- npm install @radix-ui/themes
+- npm install lucide-react
+- npm install tailwindcss
+- npm install sonner
+- npm install next-themes
 ## Tech Stack:
-Typescript
-Next.js
-Tailwind
-RadxUI
-Lucide-react
-Sonner
-Next-themes
+- Typescript
+- Next.js
+- Tailwind
+- RadxUI
+- Lucide-react
+- Sonner
+- Next-themes
 ## Created By:
 - Benjamin Bowman, [Github](https://github.com/BenBow05)
 - Wei-en Tan, [Github](https://github.com/Way05)
