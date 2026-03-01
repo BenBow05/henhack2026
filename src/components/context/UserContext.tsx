@@ -67,3 +67,20 @@ export const useUser = () => {
 	if (!context) throw new Error("useUser must be used inside UserProvider");
 	return context;
 };
+
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  avatar: string;
+  interests: string[];
+  bio: string;
+  gender: string;
+  personality: string;
+  language: string;
+  events: number[];
+  location: string;
+  matches: Record<number, number[]>;
+};
