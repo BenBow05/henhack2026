@@ -9,7 +9,8 @@ export default function EventDetails() {
   const params = useParams<{ id: string }>();
   const id: string = params.id;
   const navigate = useRouter();
-  const [event, setEvent] = useState<any>();
+  const [event, setEvent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [attending, setAttending] = useState(false);
   const user = useUser();
   useEffect(() => {

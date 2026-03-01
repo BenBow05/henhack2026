@@ -45,7 +45,7 @@ export default function CreateEvent() {
       body: JSON.stringify(newEvent)
     });
     const createdEvent = await res.json();
-    navigate.push(`/event/${createdEvent.id}`);
+    navigate.push(`/Event/${createdEvent.id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
