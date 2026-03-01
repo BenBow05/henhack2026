@@ -17,6 +17,7 @@ export interface User {
   id: number;
   name: string;
   email: string;
+  phone: string;
   password: string;
   avatar: string;
   interests: string[];
@@ -26,6 +27,8 @@ export interface User {
   language: string
   events: number[] // ids for events being attended
   location: string
+  matches: Record<number, number[]>; // eventId -> array of matched userIds
+
 }
 
 export interface Match {
