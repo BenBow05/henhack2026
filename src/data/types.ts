@@ -1,5 +1,5 @@
 export interface Event {
-  id: string;
+  id: number;
   title: string;
   description: string;
   date: string;
@@ -8,13 +8,13 @@ export interface Event {
   address: string;
   category: string;
   image: string;
-  attendees: string[]; // id of users
+  attendees: number[]; // id of users
   maxAttendees: number;
   organizer: string
 }
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -24,7 +24,7 @@ export interface User {
   gender: string;
   personality: string; 
   language: string
-  events: string[] // ids for events being attended
+  events: number[] // ids for events being attended
   location: string
 }
 

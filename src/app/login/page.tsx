@@ -4,11 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Mail, Lock, ArrowLeft } from "lucide-react";
+import { useUser } from "@/components/context/UserContext";
 
 export default function Login() {
 	const router = useRouter();
 	const [form, setForm] = useState({ email: "", password: "" });
-
+	const { login } = useUser();
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setForm({ ...form, [e.target.name]: e.target.value });
 	};
@@ -17,6 +18,7 @@ export default function Login() {
 		e.preventDefault();
 		// placeholder authentication logic
 		// TODO: replace with real auth call
+		login(form.email,form.password)
 		router.push("/");
 	};
 
@@ -32,7 +34,7 @@ export default function Login() {
 					<h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-[80%] to-secondary to-[75%] bg-clip-text text-transparent">
 						Gatherly
 					</h1>
-					<div />
+					<div/>
 				</div>
 			</header>
 
@@ -44,7 +46,7 @@ export default function Login() {
 					<h2 className="text-2xl font-semibold text-center">Login</h2>
 
 					<div>
-						<label htmlFor="email">
+						<label htmlFor="email" className="mr-2">
 							<Mail className="w-4 h-4" /> Email
 						</label>
 						<input
@@ -60,7 +62,7 @@ export default function Login() {
 					</div>
 
 					<div>
-						<label htmlFor="password">
+						<label htmlFor="password" className="mr-2">
 							<Lock className="w-4 h-4" /> Password
 						</label>
 						<input

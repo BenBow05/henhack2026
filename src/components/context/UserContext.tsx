@@ -31,7 +31,8 @@ export function UserProvider({
   ).then(res => res.json());
 
     if (found) {
-      setUser(found);
+      setUser(found[0]);
+      console.log("Logged in user:", found[0]);
       return true;
     }
 

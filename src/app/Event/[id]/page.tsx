@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 export default function EventDetails() {
   const params = useParams<{ id: string }>();
   const id: string = params.id;
-  // const { getEvent, attendEvent, isAttending } = useEvents();
   const navigate = useRouter();
   const [event, setEvent] = useState<any>();
   const [attending, setAttending] = useState(false);
@@ -18,10 +17,6 @@ export default function EventDetails() {
     .then(data => setEvent(data));
     setAttending(event?.attendees.includes("currentUserId"));
   }, [id]);
-
-  // const event = getEvent(id!);
-  // const attending = isAttending(id!);
-  // const attending = event.attendees.includes("currentUserId");
 
   if (!event) {
     return (
@@ -73,7 +68,7 @@ export default function EventDetails() {
   };
 
   const handleFindMatches = () => {
-    navigate.push(`/Match/${id}`);
+    navigate.push(`/`);
   };
 
   return (

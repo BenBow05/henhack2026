@@ -16,6 +16,33 @@ export default function FindMatches() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const calculateCompatibility = (current: any, other: any) => {
+  let score = 0;
+
+  // Interest weight 70%
+  const common =
+    current.interests.filter((i: string) =>
+      other.interests.includes(i)
+    );
+
+  score +=
+    (common.length /
+      current.interests.length) *
+    70;
+
+  // Personality weight 30%
+  if (
+    current.personality ===
+    other.personality
+  ) {
+    score += 30;
+  }
+
+  return {
+    score: Math.round(score),
+    commonInterests: common
+  };
+}
   useEffect(() => {
     if (id) {
       const matchData = getMatches(id);

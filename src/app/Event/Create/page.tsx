@@ -25,7 +25,6 @@ export default function CreateEvent() {
     e.preventDefault();
     
     const newEvent = {
-      id: Date.now().toString(),
       title: formData.title,
       description: formData.description,
       date: formData.date,
@@ -45,8 +44,8 @@ export default function CreateEvent() {
       },
       body: JSON.stringify(newEvent)
     });
-
-    navigate.push(`/event/${newEvent.id}`);
+    const createdEvent = await res.json();
+    navigate.push(`/event/${createdEvent.id}`);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
