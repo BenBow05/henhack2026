@@ -38,16 +38,21 @@ export default function CreateEvent() {
       maxAttendees: parseInt(formData.maxAttendees),
       organizer: "currentUserId"
     };
-    const res = await fetch("http://localhost:3001/events", {
+        const res = await fetch("http://localhost:3001/events", {
       method: "POST",
       headers: {
-      "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(newEvent)
     });
 
-    navigate.push(`/event/${newEvent.id}`);
-  };
+    if (!res.ok) {
+      console.error("Failed to create event:", res.status, res.statusText);
+      return;
+    }
+
+    const created = await res.json();
+    navigate.push(`/Event/${created.id}`);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -236,4 +241,5 @@ export default function CreateEvent() {
       </main>
     </div>
   );
+}
 }

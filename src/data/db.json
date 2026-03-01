@@ -321,6 +321,49 @@
       ],
       "maxAttendees": 80,
       "organizer": "Portland Live Music"
+    },
+    {
+      "id": "1772332705362",
+      "title": "Bathroom explosion",
+      "description": "Diarrhea explosion",
+      "date": "2026-01-27",
+      "time": "22:06",
+      "location": "Delaware",
+      "address": "Balls street",
+      "category": "Technology",
+      "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop",
+      "attendees": [],
+      "maxAttendees": 67,
+      "organizer": "currentUserId"
+    },
+    {
+      "id": "1772332934535",
+      "title": "asdfad",
+      "description": "asdfa",
+      "date": "2012-10-10",
+      "time": "22:12",
+      "location": "DE",
+      "address": "balls street",
+      "category": "Music",
+      "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop",
+      "attendees": [],
+      "maxAttendees": 67,
+      "organizer": "currentUserId"
+    },
+    {
+      "id": "1772333798580",
+      "title": "asdfasd",
+      "description": "asdfa",
+      "date": "1200-10-10",
+      "time": "22:12",
+      "location": "DE",
+      "address": "De",
+      "category": "Music",
+      "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop",
+      "attendees": [],
+      "maxAttendees": 67,
+      "organizer": "currentUserId"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
