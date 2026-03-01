@@ -12,6 +12,10 @@ export default function EventDetails() {
   const [event, setEvent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [attending, setAttending] = useState(false);
+  const [matches, setMatches] = useState<any[]>([]);
+  const [matchesOpen, setMatchesOpen] = useState(false);
+  const [loadingMatches, setLoadingMatches] = useState(false);
+  const [modalUser, setModalUser] = useState<any | null>(null);
   const user = useUser();
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
@@ -91,7 +95,59 @@ export default function EventDetails() {
   };
 
   const handleFindMatches = () => {
-    navigate.push(`/matches/${id}`);
+    if (!event || !event.attendees || event.attendees.length < 2) {
+      alert("Not enough attendees to find matches yet.");
+      return;
+    }
+    navigate.push(`/Match/${id}`);
+  };
+
+  const loadMatches = async () => {
+    if (!user?.user || !event) return;
+    setLoadingMatches(true);
+    const otherIds = (event.attendees || []).filter((uid: any) => String(uid) !== String(user.user.id));
+    if (otherIds.length === 0) {
+      setMatches([]);
+      setLoadingMatches(false);
+      return;
+    }
+
+    const users = await Promise.all(
+      otherIds.map((uid: any) => fetch(`http://localhost:3001/users/${uid}`).then(r => r.ok ? r.json() : null))
+    );
+
+    const me = user.user;
+    const comps = users
+      .filter((u): u is any => !!u)
+      .map(u => {
+        const common = me.interests.filter((i: any) => u.interests.includes(i));
+        let score = 0;
+        if (me.interests.length > 0) score += (common.length / Math.max(1, me.interests.length)) * 70;
+        if (me.personality && me.personality === u.personality) score += 30;
+        return { ...u, score: Math.round(score), commonInterests: common };
+      })
+      .filter(u => u.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    // Hardcoded mutual-approval mapping for demo purposes.
+    // Only users listed as mutually approved for the current user will be shown.
+    const mutualApprovals: Record<string, string[]> = {
+      // user id "0" has mutually approved user "2"
+      "0": ["2"],
+      // add other pairs as needed for testing
+    };
+
+    const allowed = mutualApprovals[String(me.id)] || [];
+    const filtered = allowed.length > 0 ? comps.filter(u => allowed.includes(String(u.id))) : comps;
+
+    setMatches(filtered);
+    setLoadingMatches(false);
+  };
+
+  const toggleMatches = () => {
+    const opening = !matchesOpen;
+    setMatchesOpen(opening);
+    if (opening && matches.length === 0 && !loadingMatches) loadMatches();
   };
 
   return (
@@ -191,6 +247,45 @@ export default function EventDetails() {
               )}
             </div>
 
+              {/* Matched users dropdown on event details (visible when attending) */}
+              {attending && (
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={toggleMatches}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
+                  >
+                    Show matched users
+                  </button>
+
+                  {matchesOpen && (
+                    <div className="mt-3 inline-block bg-card p-3 rounded-lg shadow-lg text-left">
+                      {loadingMatches && <div className="text-sm text-muted-foreground">Loading matches…</div>}
+                      {!loadingMatches && matches.length === 0 && (
+                        <div className="text-sm text-muted-foreground">No matches found yet.</div>
+                      )}
+                      {!loadingMatches && matches.length > 0 && (
+                        <ul className="space-y-2">
+                          {matches.map(m => (
+                            <li key={m.id}>
+                              <button
+                                onClick={() => setModalUser(m)}
+                                className="w-full text-left px-2 py-2 hover:bg-muted rounded-lg flex items-center gap-3"
+                              >
+                                <img src={m.avatar} alt={m.name} className="w-8 h-8 rounded-full object-cover" />
+                                <div>
+                                  <div className="font-medium">{m.name}</div>
+                                  <div className="text-xs text-muted-foreground">{m.score}% match</div>
+                                </div>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
             {!attending && (
               <p className="mt-4 text-sm text-muted-foreground text-center">
                 Attend this event to find people with similar interests to go with!
@@ -199,6 +294,25 @@ export default function EventDetails() {
           </div>
         </div>
       </main>
+      {/* Modal for matched user */}
+      {modalUser && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+            <div className="flex items-center gap-4 mb-4">
+              <img src={modalUser.avatar} alt={modalUser.name} className="w-16 h-16 rounded-full object-cover" />
+              <div>
+                <div className="font-bold text-lg">{modalUser.name}</div>
+                <div className="text-sm text-muted-foreground">{modalUser.email}</div>
+                <div className="text-sm text-muted-foreground">Phone Number: {modalUser.phone}</div>
+              </div>
+            </div>
+            <div className="mb-4 text-sm text-muted-foreground">{modalUser.bio}</div>
+            <div className="flex justify-end">
+              <button onClick={() => setModalUser(null)} className="px-4 py-2 rounded-lg bg-muted hover:bg-muted/80">Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
