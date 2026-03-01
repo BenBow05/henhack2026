@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 0,
+      "id": "0",
       "name": "You",
       "email": "you@example.com",
       "password": "password123",
@@ -22,10 +22,11 @@
         3,
         3
       ],
-      "location": "New York"
+      "location": "Delaware",
+      "phoneNumber": "302"
     },
     {
-      "id": 1,
+      "id": "1",
       "name": "Sarah Chen",
       "email": "sarah.chen@example.com",
       "password": "password123",
@@ -48,7 +49,7 @@
       "location": "New York"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Marcus Johnson",
       "email": "marcus.johnson@example.com",
       "password": "password123",
@@ -71,7 +72,7 @@
       "location": "San Francisco"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Emily Rodriguez",
       "email": "emily.rodriguez@example.com",
       "password": "password123",
@@ -92,7 +93,7 @@
       "location": "Chicago"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "David Kim",
       "email": "david.kim@example.com",
       "password": "password123",
@@ -114,7 +115,7 @@
       "location": "Los Angeles"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Lisa Anderson",
       "email": "lisa.anderson@example.com",
       "password": "password123",
@@ -137,7 +138,7 @@
       "location": "Austin"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Alex Thompson",
       "email": "alex.thompson@example.com",
       "password": "password123",
@@ -160,7 +161,7 @@
       "location": "Portland"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Nina Patel",
       "email": "nina.patel@example.com",
       "password": "password123",
@@ -182,7 +183,7 @@
       "location": "Los Angeles"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Jordan Lee",
       "email": "jordan.lee@example.com",
       "password": "password123",
@@ -207,7 +208,7 @@
   ],
   "events": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Summer Music Festival 2026",
       "description": "Join us for an unforgettable evening of live music featuring local and international artists.",
       "date": "2026-07-15",
@@ -228,7 +229,7 @@
       "organizer": "NYC Events Co."
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Tech Innovators Conference",
       "description": "Network with industry leaders and discover the latest in technology and innovation.",
       "date": "2026-03-20",
@@ -248,7 +249,7 @@
       "organizer": "TechWorld Inc."
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Contemporary Art Exhibition",
       "description": "Explore stunning contemporary artworks from emerging and established artists.",
       "date": "2026-04-10",
@@ -267,7 +268,7 @@
       "organizer": "LA Arts Collective"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Gourmet Food & Wine Festival",
       "description": "Sample exquisite dishes from top chefs and taste premium wines.",
       "date": "2026-05-05",
@@ -284,7 +285,7 @@
       "organizer": "Chicago Culinary Events"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Startup Networking Mixer",
       "description": "Connect with fellow entrepreneurs and investors.",
       "date": "2026-03-15",
@@ -302,7 +303,7 @@
       "organizer": "Austin Startup Community"
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Jazz Night Under the Stars",
       "description": "Enjoy smooth jazz performances in an intimate outdoor setting.",
       "date": "2026-06-01",
@@ -331,7 +332,8 @@
       "attendees": [],
       "maxAttendees": 100,
       "organizer": "currentUserId",
-      "id": 7
+      "id": "7"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

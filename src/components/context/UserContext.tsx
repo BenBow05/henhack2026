@@ -7,6 +7,7 @@ interface UserContextType {
 	user: User | null;
 	login: (email: string, password: string) => Promise<boolean>;
 	logout: () => void;
+	updateUser: (u: User) => void;
 }
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -34,6 +35,15 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 		localStorage.removeItem("userData");
 	};
 
+	const updateUser = (u: User) => {
+		setUser(u);
+		try {
+			localStorage.setItem("userData", JSON.stringify(u));
+		} catch (e) {
+			console.warn("Failed to persist updated user", e);
+		}
+	};
+
 	useEffect(() => {
 		try {
 			const stored = localStorage.getItem("userData");
@@ -46,7 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 	}, []);
 
 	return (
-		<UserContext.Provider value={{ user, login, logout }}>
+		<UserContext.Provider value={{ user, login, logout, updateUser }}>
 			{children}
 		</UserContext.Provider>
 	);
