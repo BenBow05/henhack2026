@@ -3,9 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { Mail, Lock, ArrowLeft } from "lucide-react";
 
 export default function Login() {
@@ -47,10 +44,10 @@ export default function Login() {
 					<h2 className="text-2xl font-semibold text-center">Login</h2>
 
 					<div>
-						<Label htmlFor="email">
+						<label htmlFor="email">
 							<Mail className="w-4 h-4" /> Email
-						</Label>
-						<Input
+						</label>
+						<input
 							id="email"
 							name="email"
 							type="email"
@@ -63,10 +60,10 @@ export default function Login() {
 					</div>
 
 					<div>
-						<Label htmlFor="password">
+						<label htmlFor="password">
 							<Lock className="w-4 h-4" /> Password
-						</Label>
-						<Input
+						</label>
+						<input
 							id="password"
 							name="password"
 							type="password"
@@ -78,9 +75,9 @@ export default function Login() {
 						/>
 					</div>
 
-					<Button type="submit" className="w-full">
+					<button type="submit" className="w-full">
 						Sign in
-					</Button>
+					</button>
 
 					<p className="text-sm text-center text-muted-foreground">
 						Don&apos;t have an account?{" "}

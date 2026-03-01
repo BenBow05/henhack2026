@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
+import { UserProvider } from "@/components/context/UserContext";
 // import { EventProvider } from "../components/context/EventContext";
 
 
@@ -16,11 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* <EventProvider> */}
+      <UserProvider>
         <body
         className={`antialiased`}
       >
         {children}
       </body>
+      </UserProvider>
+        
       {/* </EventProvider> */}
       
     </html>

@@ -2,12 +2,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEvents } from "../../../components/context/EventContext";
+// import { useEvents } from "../../../components/context/EventContext";
 import { ArrowLeft, Calendar, MapPin, Users, Type, AlignLeft, Tag, Image } from "lucide-react";
 
 export default function CreateEvent() {
   const navigate = useRouter();
-  const { addEvent } = useEvents();
   
   const [formData, setFormData] = useState({
     title: "",
@@ -15,13 +14,14 @@ export default function CreateEvent() {
     date: "",
     time: "",
     location: "",
+    address: "",
     category: "Music",
     maxAttendees: "100",
   });
 
   const categories = ["Music", "Technology", "Art", "Food", "Networking", "Sports", "Other"];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const newEvent = {
@@ -31,14 +31,21 @@ export default function CreateEvent() {
       date: formData.date,
       time: formData.time,
       location: formData.location,
+      address: formData.address,
       category: formData.category,
       image: `https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop`,
       attendees: [],
       maxAttendees: parseInt(formData.maxAttendees),
+      organizer: "currentUserId"
     };
+    const res = await fetch("http://localhost:3001/events", {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newEvent)
+    });
 
-    // THIS NEEDEDS TO BE FIXED WITH DAVENS NEW OBJS
-    // addEvent(newEvent);
     navigate.push(`/event/${newEvent.id}`);
   };
 
@@ -148,6 +155,22 @@ export default function CreateEvent() {
                 name="location"
                 required
                 value={formData.location}
+                onChange={handleChange}
+                className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
+                placeholder="Central Park, New York"
+              />
+            </div>
+            <div>
+              <label htmlFor="location" className="flex items-center gap-2 mb-2">
+                <MapPin className="w-5 h-5 text-primary" />
+                address
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                required
+                value={formData.address}
                 onChange={handleChange}
                 className="w-full px-4 py-3 bg-input-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
                 placeholder="Central Park, New York"

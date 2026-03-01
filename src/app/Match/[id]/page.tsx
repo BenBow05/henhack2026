@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from "react";
-import { useEvents } from "../../../components/context/EventContext";
 import { ArrowLeft, Heart, X, Sparkles, Users, CheckCircle } from "lucide-react";
 import { Match } from "../../../data/types";
 import Link from "next/link";
@@ -8,9 +7,12 @@ import { useParams } from "next/navigation";
 
 export default function FindMatches() {
   const { id } = useParams<{ id: string }>();
-  const { getEvent, getMatches, approveMatch, denyMatch, approvedMatches } = useEvents();
-  
-  const event = getEvent(id!);
+  const [event, setEvent] = useState<any>();
+  useEffect(() => {
+    fetch(`http://localhost:3001/events/${id}`)
+    .then(res => res.json())
+    .then(data => setEvent(data));
+  }, [id]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 

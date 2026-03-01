@@ -11,15 +11,17 @@ export default function EventDetails() {
   // const { getEvent, attendEvent, isAttending } = useEvents();
   const navigate = useRouter();
   const [event, setEvent] = useState<any>();
+  const [attending, setAttending] = useState(false);
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
     .then(res => res.json())
     .then(data => setEvent(data));
+    setAttending(event?.attendees.includes("currentUserId"));
   }, [id]);
 
   // const event = getEvent(id!);
   // const attending = isAttending(id!);
-  const attending = event.attendees.includes("currentUserId");
+  // const attending = event.attendees.includes("currentUserId");
 
   if (!event) {
     return (
@@ -35,15 +37,39 @@ export default function EventDetails() {
   }
 
   const handleAttend = () => {
+    if (attending) {
+      setEvent({
+        ...event,
+        //change this to filter out current user id
+        attendees: event.attendees.filter((id: string) => id !== "currentUserId")
+      });
+    } else {      
+      setEvent({
+        ...event,
+        //change this to add current user id
+        attendees: [...event.attendees, "currentUserId"]
+      });
+    }
     fetch(`http://localhost:3001/events/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          attending: !attending
+          attendees: event.attendees
       })
     });
+    //current-user will be replaced with ${user-id}
+    fetch(`http://localhost:3001/users/current-user`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          attendees: event.attendees
+      })
+    });
+    setAttending(!event?.attendees.includes("currentUserId"));
   };
 
   const handleFindMatches = () => {

@@ -6,13 +6,29 @@
       "email": "you@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop",
-      "interests": ["Music", "Technology", "Networking", "Art", "Food"],
+      "interests": [
+        "Music",
+        "Technology",
+        "Networking",
+        "Art",
+        "Food"
+      ],
       "bio": "Love discovering new events and meeting interesting people!",
       "gender": "Non-binary",
       "personality": "Outgoing",
       "language": "English",
-      "events": ["1", "2"],
-      "location": "New York"
+      "events": [
+        "1",
+        "2"
+      ],
+      "location": "New York",
+      "attendees": [
+        "1",
+        "2",
+        "5",
+        "6",
+        "8"
+      ]
     },
     {
       "id": "1",
@@ -20,12 +36,21 @@
       "email": "sarah.chen@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-      "interests": ["Music", "Art", "Photography", "Travel"],
+      "interests": [
+        "Music",
+        "Art",
+        "Photography",
+        "Travel"
+      ],
       "bio": "Music enthusiast and photographer. Always looking for creative events!",
       "gender": "Female",
       "personality": "Creative",
       "language": "English",
-      "events": ["1", "3", "6"],
+      "events": [
+        "1",
+        "3",
+        "6"
+      ],
       "location": "New York"
     },
     {
@@ -34,12 +59,21 @@
       "email": "marcus.johnson@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-      "interests": ["Technology", "Networking", "Startups", "Music"],
+      "interests": [
+        "Technology",
+        "Networking",
+        "Startups",
+        "Music"
+      ],
       "bio": "Tech entrepreneur passionate about innovation and connecting with like-minded people.",
       "gender": "Male",
       "personality": "Ambitious",
       "language": "English",
-      "events": ["1", "2", "5"],
+      "events": [
+        "1",
+        "2",
+        "5"
+      ],
       "location": "San Francisco"
     },
     {
@@ -48,12 +82,19 @@
       "email": "emily.rodriguez@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop",
-      "interests": ["Food", "Cooking", "Wine", "Travel"],
+      "interests": [
+        "Food",
+        "Cooking",
+        "Wine",
+        "Travel"
+      ],
       "bio": "Foodie and wine lover. Love exploring new cuisines and restaurants!",
       "gender": "Female",
       "personality": "Warm",
       "language": "Spanish",
-      "events": ["4"],
+      "events": [
+        "4"
+      ],
       "location": "Chicago"
     },
     {
@@ -62,12 +103,20 @@
       "email": "david.kim@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-      "interests": ["Art", "Design", "Technology", "Music"],
+      "interests": [
+        "Art",
+        "Design",
+        "Technology",
+        "Music"
+      ],
       "bio": "Designer and tech enthusiast. Passionate about the intersection of art and technology.",
       "gender": "Male",
       "personality": "Analytical",
       "language": "English",
-      "events": ["2", "3"],
+      "events": [
+        "2",
+        "3"
+      ],
       "location": "Los Angeles"
     },
     {
@@ -76,12 +125,21 @@
       "email": "lisa.anderson@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop",
-      "interests": ["Fitness", "Wellness", "Music", "Networking"],
+      "interests": [
+        "Fitness",
+        "Wellness",
+        "Music",
+        "Networking"
+      ],
       "bio": "Wellness coach and fitness enthusiast. Love attending health and music events!",
       "gender": "Female",
       "personality": "Energetic",
       "language": "English",
-      "events": ["1", "5", "6"],
+      "events": [
+        "1",
+        "5",
+        "6"
+      ],
       "location": "Austin"
     },
     {
@@ -90,12 +148,21 @@
       "email": "alex.thompson@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop",
-      "interests": ["Music", "Technology", "Gaming", "Art"],
+      "interests": [
+        "Music",
+        "Technology",
+        "Gaming",
+        "Art"
+      ],
       "bio": "Musician and gamer. Always up for a concert or tech meetup!",
       "gender": "Male",
       "personality": "Chill",
       "language": "English",
-      "events": ["1", "2", "6"],
+      "events": [
+        "1",
+        "2",
+        "6"
+      ],
       "location": "Portland"
     },
     {
@@ -104,12 +171,20 @@
       "email": "nina.patel@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=150&h=150&fit=crop",
-      "interests": ["Art", "Photography", "Travel", "Food"],
+      "interests": [
+        "Art",
+        "Photography",
+        "Travel",
+        "Food"
+      ],
       "bio": "Travel photographer capturing moments around the world.",
       "gender": "Female",
       "personality": "Adventurous",
       "language": "English",
-      "events": ["3", "4"],
+      "events": [
+        "3",
+        "4"
+      ],
       "location": "Los Angeles"
     },
     {
@@ -118,12 +193,21 @@
       "email": "jordan.lee@example.com",
       "password": "password123",
       "avatar": "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=150&h=150&fit=crop",
-      "interests": ["Technology", "Networking", "Entrepreneurship", "Music"],
+      "interests": [
+        "Technology",
+        "Networking",
+        "Entrepreneurship",
+        "Music"
+      ],
       "bio": "Startup founder and tech enthusiast. Love connecting with other entrepreneurs!",
       "gender": "Non-binary",
       "personality": "Driven",
       "language": "English",
-      "events": ["1", "2", "5"],
+      "events": [
+        "1",
+        "2",
+        "5"
+      ],
       "location": "Austin"
     }
   ],
@@ -138,7 +222,13 @@
       "address": "Central Park West, NY 10024",
       "category": "Music",
       "image": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=800&h=500&fit=crop",
-      "attendees": ["1", "2", "5", "6", "8"],
+      "attendees": [
+        "1",
+        "2",
+        "5",
+        "6",
+        "8"
+      ],
       "maxAttendees": 500,
       "organizer": "NYC Events Co."
     },
@@ -152,7 +242,12 @@
       "address": "747 Howard St, San Francisco, CA 94103",
       "category": "Technology",
       "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=500&fit=crop",
-      "attendees": ["2", "4", "6", "8"],
+      "attendees": [
+        "2",
+        "4",
+        "6",
+        "8"
+      ],
       "maxAttendees": 300,
       "organizer": "TechWorld Inc."
     },
@@ -166,7 +261,11 @@
       "address": "5905 Wilshire Blvd, Los Angeles, CA 90036",
       "category": "Art",
       "image": "https://images.unsplash.com/photo-1531243269054-5ebf6f34081e?w=800&h=500&fit=crop",
-      "attendees": ["1", "4", "7"],
+      "attendees": [
+        "1",
+        "4",
+        "7"
+      ],
       "maxAttendees": 150,
       "organizer": "LA Arts Collective"
     },
@@ -180,7 +279,10 @@
       "address": "600 E Grand Ave, Chicago, IL 60611",
       "category": "Food",
       "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=500&fit=crop",
-      "attendees": ["3", "7"],
+      "attendees": [
+        "3",
+        "7"
+      ],
       "maxAttendees": 200,
       "organizer": "Chicago Culinary Events"
     },
@@ -194,7 +296,11 @@
       "address": "123 Startup Ln, Austin, TX 78701",
       "category": "Networking",
       "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=500&fit=crop",
-      "attendees": ["2", "5", "8"],
+      "attendees": [
+        "2",
+        "5",
+        "8"
+      ],
       "maxAttendees": 100,
       "organizer": "Austin Startup Community"
     },
@@ -208,7 +314,11 @@
       "address": "Riverside Park Dr, Portland, OR 97209",
       "category": "Music",
       "image": "https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=800&h=500&fit=crop",
-      "attendees": ["1", "5", "6"],
+      "attendees": [
+        "1",
+        "5",
+        "6"
+      ],
       "maxAttendees": 80,
       "organizer": "Portland Live Music"
     }
