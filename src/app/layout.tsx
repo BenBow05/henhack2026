@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
-import { EventProvider } from "../components/context/EventContext";
+// import { EventProvider } from "../components/context/EventContext";
 
 
 export const metadata: Metadata = {
@@ -15,13 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <EventProvider>
+      {/* <EventProvider> */}
         <body
         className={`antialiased`}
       >
         {children}
       </body>
-      </EventProvider>
+      {/* </EventProvider> */}
       
     </html>
   );

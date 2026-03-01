@@ -16,6 +16,8 @@ export interface Event {
 export interface User {
   id: string;
   name: string;
+  email: string;
+  password: string;
   avatar: string;
   interests: string[];
   bio: string;

@@ -1,16 +1,25 @@
 "use client"
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-import { useEvents } from "../../../components/context/EventContext";
+// import { useEvents } from "../../../components/context/EventContext";
 import { ArrowLeft, Calendar, MapPin, Users, Heart, UserPlus } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function EventDetails() {
   const params = useParams<{ id: string }>();
   const id: string = params.id;
-  const { getEvent, attendEvent, isAttending } = useEvents();
+  // const { getEvent, attendEvent, isAttending } = useEvents();
   const navigate = useRouter();
-  const event = getEvent(id!);
-  const attending = isAttending(id!);
+  const [event, setEvent] = useState<any>();
+  useEffect(() => {
+    fetch(`http://localhost:3001/events/${id}`)
+    .then(res => res.json())
+    .then(data => setEvent(data));
+  }, [id]);
+
+  // const event = getEvent(id!);
+  // const attending = isAttending(id!);
+  const attending = event.attendees.includes("currentUserId");
 
   if (!event) {
     return (
@@ -26,7 +35,15 @@ export default function EventDetails() {
   }
 
   const handleAttend = () => {
-    attendEvent(id!);
+    fetch(`http://localhost:3001/events/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          attending: !attending
+      })
+    });
   };
 
   const handleFindMatches = () => {

@@ -11,6 +11,7 @@
 - npm install sonner
 - npm install next-themes
 - npm install -g json-server
+- json-server --watch src/data/db.json --port 3001
 ## Tech Stack:
 - Typescript
 - Next.js

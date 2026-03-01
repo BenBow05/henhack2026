@@ -1,12 +1,16 @@
 "use client"
-import { useState } from "react";
-import { useEvents } from "../components/context/EventContext";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, MapPin, Users, Sparkles, Menu } from "lucide-react";
 
 export default function Home() {
-  const { events } = useEvents();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [events, setEvents] = useState<any[]>([]);
+  useEffect(() => {
+    fetch(`http://localhost:3001/events`)
+    .then(res => res.json())
+    .then(data => setEvents(data));
+  }, []);
 
   return (
     <div className="min-h-screen">
