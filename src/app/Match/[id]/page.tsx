@@ -71,7 +71,7 @@ export default function FindMatches() {
 
     // FIX: Guest fallback uses a string ID to stay consistent with db.json string IDs
     const me: User = user ?? {
-      id: "guest",
+      id: 0,
       name: "Guest",
       email: "",
       password: "",
@@ -82,7 +82,9 @@ export default function FindMatches() {
       personality: "",
       language: "",
       events: [],
-      location: ""
+      location: "",
+      phone: "",
+      matches: {}
     };
 
     getMatches(id, me).then(result => {
