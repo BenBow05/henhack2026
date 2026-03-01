@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { User } from "@/data/types";
 
 interface UserContextType {
@@ -19,10 +19,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 			`http://localhost:3001/users?email=${email}&password=${password}`,
 		).then((res) => res.json());
 
-		if (found) {
+		if (found && Array.isArray(found) && found.length > 0) {
 			setUser(found[0]);
 			console.log("Logged in user:", found[0]);
-			localStorage.setItem("userData", found[0]);
+			localStorage.setItem("userData", JSON.stringify(found[0]));
 			return true;
 		}
 
@@ -31,8 +31,19 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
 	const logout = () => {
 		setUser(null);
-		localStorage.clear();
+		localStorage.removeItem("userData");
 	};
+
+	useEffect(() => {
+		try {
+			const stored = localStorage.getItem("userData");
+			if (stored) {
+				setUser(JSON.parse(stored));
+			}
+		} catch (e) {
+			console.warn("Failed to parse stored userData", e);
+		}
+	}, []);
 
 	return (
 		<UserContext.Provider value={{ user, login, logout }}>
