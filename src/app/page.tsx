@@ -2,9 +2,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, MapPin, Users, Sparkles, Menu } from "lucide-react";
+import { useUser } from "../components/context/UserContext";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useUser();
   const [events, setEvents] = useState<any[]>([]);
   useEffect(() => {
     fetch(`http://localhost:3001/events`)
@@ -25,47 +27,64 @@ export default function Home() {
               <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-white to-secondary to-[50%] to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
             </div>
 
-          {/* Hamburger Menu */}
-            <div className="relative">
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
-              >
-                <Menu className="w-8 h-8 text-white" />
-              </button>
+{/* Hamburger Menu */}
+<div className="relative">
+  <button
+    onClick={() => setMenuOpen(!menuOpen)}
+    className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+  >
+    <Menu className="w-8 h-8 text-white" />
+  </button>
 
-              {menuOpen && (
-              
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
-                  { /* For future expansion, you can add more menu items here*/ }
-                  <Link
-                    href="/Event/Create"
-                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-                  >
-                    Create New Event
-                  </Link>
-                  <Link
-                    href="/Event/Personal"
-                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-                  >
-                    View My Events
-                  </Link>
-                  
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-                  >
-                    Edit Profile
-                  </Link>
-                   <Link
-                    href="/signout"
-                    className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-                  >
-                    Sign Out
-                  </Link>
-                </div>
-              )}
-            </div>
+  {menuOpen && (
+    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+
+      {/* If NOT logged in */}
+      {!user && (
+        <Link
+          href="/login"
+          className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+        >
+          Login
+        </Link>
+      )}
+
+      {/* If logged in */}
+      {user && (
+        <>
+          <Link
+            href="/Event/Create"
+            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+          >
+            Create New Event
+          </Link>
+
+          <Link
+            href="/Event/Personal"
+            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+          >
+            View My Events
+          </Link>
+
+          <Link
+            href="/profile"
+            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
+          >
+            Edit Profile
+          </Link>
+
+          <button
+            onClick={() => logout()}
+            className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors"
+          >
+            Sign Out
+          </button>
+        </>
+      )}
+
+    </div>
+  )}
+</div>
           </div>
 
           <p className="text-lg text-white opacity-90">

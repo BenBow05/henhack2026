@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useUser } from "../components/context/UserContext";
+import { useUser } from "../../components/context/UserContext";
 import {
   ArrowLeft,
   User as UserIcon,
@@ -10,11 +10,10 @@ import {
   Heart,
   Tag,
   AlignLeft,
-  Sparkles,
   Check,
 } from "lucide-react";
-import { AVAILABLE_INTERESTS, EVENT_CATEGORIES } from "../../data/constants";
 
+import { AVAILABLE_INTERESTS, EVENT_CATEGORIES } from "../../data/constants";
 
 type FormData = {
   name: string;
@@ -24,37 +23,48 @@ type FormData = {
   preferredCategories: string[];
 };
 
-export function Profile() {
-  const { user, updateUser, hasCompletedProfile } = useUser();
 
-  const [formData, setFormData] = useState<FormData>({
-    name: user?.name || "",
-    bio: user?.bio || "",
-    location: user?.location || "",
-    interests: user?.interests || [],
-    preferredCategories: user?.preferredCategories || [],
+export default function ProfilePage() {
+  return <Profile />;
+}
+
+export function Profile() {
+  const { user } = useUser();
+
+  const [formData, setFormData] = useState({
+    name: user?.name ?? "",
+    bio: user?.bio ?? "",
+    location: user?.location ?? "",
+    interests: user?.interests ?? [],
+    gender: user?.gender ?? "",
+    personality: user?.personality ?? "",
+    language: user?.language ?? "",
+    avatar: user?.avatar ?? "",
   });
 
   const [saved, setSaved] = useState(false);
 
-  useEffect(() => {
-    if (!user) return;
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Please log in to view your profile.</p>
+      </div>
+    );
+  }
 
-    setFormData({
-      name: user.name || "",
-      bio: user.bio || "",
-      location: user.location || "",
-      interests: user.interests || [],
-      preferredCategories: user.preferredCategories || [],
-    });
-  }, [user]);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateUser(formData);
+
+    if (user) {
+      await fetch(`http://localhost:3001/users/${user.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
-  };
+  }};
 
   const toggleInterest = (interest: string) => {
     setFormData((prev) => ({
@@ -65,50 +75,17 @@ export function Profile() {
     }));
   };
 
-  const toggleCategory = (category: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      preferredCategories: prev.preferredCategories.includes(category)
-        ? prev.preferredCategories.filter((c) => c !== category)
-        : [...prev.preferredCategories, category],
-    }));
-  };
-
-  if (!user) return null;
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-secondary px-6 py-6 shadow-lg">
-        <div className="max-w-4xl mx-auto">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Events
-          </Link>
-
-          <div className="flex items-center gap-3 mb-2">
-            <UserIcon className="w-8 h-8" />
-            <h1 className="text-3xl">Your Profile</h1>
-          </div>
-
-          <p className="text-lg opacity-90">
-            {hasCompletedProfile
-              ? "Update your profile to get better event matches"
-              : "Complete your profile to get personalized event recommendations"}
-          </p>
-        </div>
-      </header>
-
       <main className="max-w-4xl mx-auto px-6 py-12">
         <form onSubmit={handleSubmit} className="space-y-8">
+
           {/* Basic Info */}
-          <div className="bg-card rounded-xl shadow-lg p-8 border border-border">
+          <div className="bg-card rounded-xl shadow-lg p-8 border">
             <h2 className="text-2xl mb-6">Basic Information</h2>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
+
               <input
                 required
                 value={formData.name}
@@ -120,12 +97,20 @@ export function Profile() {
               />
 
               <input
-                required
                 value={formData.location}
                 onChange={(e) =>
                   setFormData({ ...formData, location: e.target.value })
                 }
                 placeholder="Location"
+                className="w-full px-4 py-3 border rounded-lg"
+              />
+
+              <input
+                value={formData.avatar}
+                onChange={(e) =>
+                  setFormData({ ...formData, avatar: e.target.value })
+                }
+                placeholder="Avatar Image URL"
                 className="w-full px-4 py-3 border rounded-lg"
               />
 
@@ -141,8 +126,43 @@ export function Profile() {
             </div>
           </div>
 
+          {/* Profile Details */}
+          <div className="bg-card rounded-xl shadow-lg p-8 border">
+            <h2 className="text-2xl mb-6">Profile Details</h2>
+
+            <div className="space-y-4">
+
+              <input
+                value={formData.gender}
+                onChange={(e) =>
+                  setFormData({ ...formData, gender: e.target.value })
+                }
+                placeholder="Gender"
+                className="w-full px-4 py-3 border rounded-lg"
+              />
+
+              <input
+                value={formData.personality}
+                onChange={(e) =>
+                  setFormData({ ...formData, personality: e.target.value })
+                }
+                placeholder="Personality (e.g. Introvert, ENFP, etc.)"
+                className="w-full px-4 py-3 border rounded-lg"
+              />
+
+              <input
+                value={formData.language}
+                onChange={(e) =>
+                  setFormData({ ...formData, language: e.target.value })
+                }
+                placeholder="Language"
+                className="w-full px-4 py-3 border rounded-lg"
+              />
+            </div>
+          </div>
+
           {/* Interests */}
-          <div className="bg-card rounded-xl shadow-lg p-8 border border-border">
+          <div className="bg-card rounded-xl shadow-lg p-8 border">
             <h2 className="text-2xl mb-4">Your Interests</h2>
 
             <div className="flex flex-wrap gap-3">
@@ -160,7 +180,6 @@ export function Profile() {
                         : "bg-background"
                     }`}
                   >
-                    {isSelected && <Check className="w-4 h-4 inline mr-1" />}
                     {interest}
                   </button>
                 );
@@ -168,36 +187,10 @@ export function Profile() {
             </div>
           </div>
 
-          {/* Categories */}
-          <div className="bg-card rounded-xl shadow-lg p-8 border border-border">
-            <h2 className="text-2xl mb-4">Preferred Event Types</h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {EVENT_CATEGORIES.map((category) => {
-                const isSelected =
-                  formData.preferredCategories.includes(category);
-
-                return (
-                  <button
-                    key={category}
-                    type="button"
-                    onClick={() => toggleCategory(category)}
-                    className={`p-4 rounded-xl border ${
-                      isSelected
-                        ? "bg-primary text-white"
-                        : "bg-background"
-                    }`}
-                  >
-                    {category}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
+          {/* Save Button */}
           <button
             type="submit"
-            className="w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-lg"
+            className="w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-lg text-white"
           >
             {saved ? "Profile Saved!" : "Save Profile"}
           </button>
