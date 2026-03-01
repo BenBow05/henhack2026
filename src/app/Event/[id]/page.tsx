@@ -9,14 +9,36 @@ export default function EventDetails() {
   const params = useParams<{ id: string }>();
   const id: string = params.id;
   const navigate = useRouter();
-  const [event, setEvent] = useState<any>();
+  const [event, setEvent] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [attending, setAttending] = useState(false);
+
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
-    .then(res => res.json())
-    .then(data => setEvent(data));
-    setAttending(event?.attendees.includes("currentUserId"));
+      .then(res => {
+        if (!res.ok) return null;
+        return res.json();
+      })
+      .then(data => {
+        if (data && data.id) {
+          setEvent(data);
+          setAttending(data.attendees?.includes("currentUserId") ?? false);
+        } else {
+          setEvent(null);
+        }
+        setLoading(false);
+      });
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-muted-foreground">Loading event...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!event) {
     return (
