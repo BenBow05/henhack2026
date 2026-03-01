@@ -8,10 +8,11 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useUser();
   const [events, setEvents] = useState<any[]>([]);
+
   useEffect(() => {
     fetch(`http://localhost:3001/events`)
-    .then(res => res.json())
-    .then(data => setEvents(data));
+      .then(res => res.json())
+      .then(data => setEvents(data));
   }, []);
 
   return (
@@ -23,68 +24,92 @@ export default function Home() {
             
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <Sparkles className="w-8 h-8" />
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-accent from-white to-secondary to-[50%] to-[75%] bg-clip-text text-transparent ...">Gatherly</h1>
+              <Sparkles className="w-8 h-8 text-white" />
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-secondary bg-clip-text text-transparent">
+                Gatherly
+              </h1>
             </div>
 
-{/* Hamburger Menu */}
-<div className="relative">
-  <button
-    onClick={() => setMenuOpen(!menuOpen)}
-    className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
-  >
-    <Menu className="w-8 h-8 text-white" />
-  </button>
+            {/* Navigation Actions */}
+            <div className="flex items-center gap-3">
+              {/* About Button - Shown only on medium screens and up, to the left of hamburger */}
+              <Link 
+                href="/about" 
+                className="hidden md:block px-4 py-2 mr-4 rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors font-medium"
+              >
+                About
+              </Link>
 
-  {menuOpen && (
-    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+              {/* Hamburger Menu */}
+              <div className="relative">
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="p-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors flex items-center justify-center"
+                  aria-label="Toggle menu"
+                >
+                  <Menu className="w-8 h-8 text-white" />
+                </button>
 
-      {/* If NOT logged in */}
-      {!user && (
-        <Link
-          href="/login"
-          className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-        >
-          Login
-        </Link>
-      )}
+                {menuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50 border border-gray-100">
+                    
+                    {/* Mobile-only About Link (visible when hidden in header) */}
+                    <Link
+                      href="/about"
+                      className="block md:hidden px-4 py-3 hover:bg-gray-100 transition-colors border-b border-gray-50 text-gray-700"
+                    >
+                      About
+                    </Link>
 
-      {/* If logged in */}
-      {user && (
-        <>
-          <Link
-            href="/Event/Create"
-            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-          >
-            Create New Event
-          </Link>
+                    {/* If NOT logged in */}
+                    {!user && (
+                      <Link
+                        href="/login"
+                        className="block px-4 py-3 hover:bg-gray-100 transition-colors text-gray-700"
+                      >
+                        Login
+                      </Link>
+                    )}
 
-          <Link
-            href="/Event/Personal"
-            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-          >
-            View My Events
-          </Link>
+                    {/* If logged in */}
+                    {user && (
+                      <>
+                        <Link
+                          href="/Event/Create"
+                          className="block px-4 py-3 hover:bg-gray-100 transition-colors text-gray-700"
+                        >
+                          Create New Event
+                        </Link>
 
-          <Link
-            href="/profile"
-            className="block px-4 py-3 hover:bg-gray-100 transition-colors"
-          >
-            Edit Profile
-          </Link>
+                        <Link
+                          href="/Event/Personal"
+                          className="block px-4 py-3 hover:bg-gray-100 transition-colors text-gray-700"
+                        >
+                          View My Events
+                        </Link>
 
-          <button
-            onClick={() => logout()}
-            className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors"
-          >
-            Sign Out
-          </button>
-        </>
-      )}
+                        <Link
+                          href="/profile"
+                          className="block px-4 py-3 hover:bg-gray-100 transition-colors text-gray-700"
+                        >
+                          Edit Profile
+                        </Link>
 
-    </div>
-  )}
-</div>
+                        <button
+                          onClick={() => {
+                            logout();
+                            setMenuOpen(false);
+                          }}
+                          className="w-full text-left px-4 py-3 hover:bg-gray-100 transition-colors text-red-600 font-medium"
+                        >
+                          Sign Out
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           <p className="text-lg text-white opacity-90">
@@ -96,8 +121,8 @@ export default function Home() {
       {/* Events Grid */}
       <main className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-8">
-          <h2 className="text-2xl mb-2">Upcoming Events</h2>
-          <p className="text-muted-foreground">Find your next adventure and connect with like-minded people</p>
+          <h2 className="text-2xl font-semibold mb-2">Upcoming Events</h2>
+          <p className="text-muted-foreground text-gray-600">Find your next adventure and connect with like-minded people</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -105,7 +130,7 @@ export default function Home() {
             <Link
               key={event.id}
               href={`/Event/${event.id}`}
-              className="group bg-card outline outline-2 outline-primary rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border"
+              className="group bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-border"
             >
               <div className="aspect-video bg-muted overflow-hidden">
                 <img
@@ -118,7 +143,7 @@ export default function Home() {
                 <div className="inline-block px-3 py-1 bg-accent text-accent-foreground rounded-full text-sm mb-3">
                   {event.category}
                 </div>
-                <h3 className="text-xl mb-3 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
                   {event.title}
                 </h3>
                 <div className="space-y-2 text-sm text-muted-foreground">
