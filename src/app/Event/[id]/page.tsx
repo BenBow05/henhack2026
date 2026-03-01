@@ -1,9 +1,9 @@
 "use client"
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
-// import { useEvents } from "../../../components/context/EventContext";
 import { ArrowLeft, Calendar, MapPin, Users, Heart, UserPlus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
+import { useUser } from "@/components/context/UserContext";
 
 export default function EventDetails() {
   const params = useParams<{ id: string }>();
@@ -11,13 +11,19 @@ export default function EventDetails() {
   const navigate = useRouter();
   const [event, setEvent] = useState<any>();
   const [attending, setAttending] = useState(false);
+  const user = useUser();
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
     .then(res => res.json())
     .then(data => setEvent(data));
-    setAttending(event?.attendees.includes("currentUserId"));
   }, [id]);
 
+  useEffect(() => {
+    if(event && user.user){
+      console.log("Event attendees:", event.attendees);
+      console.log("Current user ID:", user.user.id);
+      setAttending(event.attendees.includes(user.user.id));
+    }}, [event]);
   if (!event) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -32,18 +38,42 @@ export default function EventDetails() {
   }
 
   const handleAttend = () => {
+    let updatedAttendees = [];
     if (attending) {
+      updatedAttendees = event.attendees.filter((id: number) => id !== user.user?.id);
       setEvent({
         ...event,
         //change this to filter out current user id
-        attendees: event.attendees.filter((id: string) => id !== "currentUserId")
+        attendees: event.attendees.filter((id: number) => id !== user.user?.id)
       });
-    } else {      
+      if(user.user?.events.length){
+      fetch(`http://localhost:3001/users/${user.user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          events: user.user.events.filter((id: number) => id !== event.id)
+        })
+        });
+      }
+    } else {
+      updatedAttendees = [...event.attendees, user.user?.id];
       setEvent({
         ...event,
         //change this to add current user id
-        attendees: [...event.attendees, "currentUserId"]
+        attendees: [...event.attendees, user.user?.id]
       });
+      if(user.user?.events.length){
+      fetch(`http://localhost:3001/users/${user.user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          events: [...user.user.events, event.id]
+      })
+    });
     }
     fetch(`http://localhost:3001/events/${id}`, {
         method: "PATCH",
@@ -51,24 +81,16 @@ export default function EventDetails() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          attendees: event.attendees
+          attendees: updatedAttendees
       })
     });
-    //current-user will be replaced with ${user-id}
-    fetch(`http://localhost:3001/users/current-user`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          attendees: event.attendees
-      })
-    });
-    setAttending(!event?.attendees.includes("currentUserId"));
+    }
+    
+    setAttending(!event?.attendees.includes(user.user?.id));
   };
 
   const handleFindMatches = () => {
-    navigate.push(`/`);
+    navigate.push(`/matches/${id}`);
   };
 
   return (

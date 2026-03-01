@@ -37,10 +37,10 @@ export default function CreateEvent() {
       maxAttendees: parseInt(formData.maxAttendees),
       organizer: "currentUserId"
     };
-        const res = await fetch("http://localhost:3001/events", {
+    const res = await fetch("http://localhost:3001/events", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+      "Content-Type": "application/json"
       },
       body: JSON.stringify(newEvent)
     });

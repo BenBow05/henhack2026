@@ -4,14 +4,19 @@ import { ArrowLeft, Heart, X, Sparkles, Users, CheckCircle } from "lucide-react"
 import { Match } from "../../../data/types";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useUser } from "@/components/context/UserContext";
 
 export default function FindMatches() {
   const { id } = useParams<{ id: string }>();
   const [event, setEvent] = useState<any>();
+  const user = useUser();
   useEffect(() => {
     fetch(`http://localhost:3001/events/${id}`)
     .then(res => res.json())
     .then(data => setEvent(data));
+    
+    const matchData = getMatches(id);
+    setMatches(matchData);
   }, [id]);
   const [matches, setMatches] = useState<Match[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,13 +48,6 @@ export default function FindMatches() {
     commonInterests: common
   };
 }
-  useEffect(() => {
-    if (id) {
-      const matchData = getMatches(id);
-      setMatches(matchData);
-    }
-  }, [id]);
-
   if (!event) {
     return (
       <div className="min-h-screen flex items-center justify-center">
