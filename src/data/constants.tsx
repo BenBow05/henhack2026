@@ -30,4 +30,5 @@ export const EVENT_CATEGORIES = [
   "Sports",
   "Wellness",
   "Entertainment",
+  "Fitness"
 ];
