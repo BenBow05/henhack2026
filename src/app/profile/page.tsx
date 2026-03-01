@@ -11,6 +11,7 @@ import {
   Tag,
   AlignLeft,
   Check,
+  Sparkles
 } from "lucide-react";
 
 import { AVAILABLE_INTERESTS, EVENT_CATEGORIES } from "../../data/constants";
@@ -76,7 +77,41 @@ export function Profile() {
   };
 
   return (
+    
     <div className="min-h-screen bg-background">
+        {/* Header */}
+<header className="bg-gradient-to-r from-primary to-[90%] to-secondary px-4 py-8 shadow-lg">
+  <div className="max-w-6xl mx-auto">
+
+    <div className="flex items-center justify-between mb-4">
+
+      {/* Back Button */}
+      <Link
+        href="/"
+        className="flex items-center gap-2 text-white hover:opacity-80 transition-opacity"
+      >
+        <ArrowLeft className="w-6 h-6" />
+        <span className="font-medium">Back</span>
+      </Link>
+
+      {/* Logo */}
+      <div className="flex items-center gap-3">
+        <Sparkles className="w-8 h-8 text-white" />
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-white to-secondary bg-clip-text text-transparent">
+          Gatherly
+        </h1>
+      </div>
+
+      {/* Spacer to balance layout */}
+      <div className="w-16" />
+    </div>
+
+    <p className="text-lg text-white opacity-90">
+      Edit your profile
+    </p>
+
+  </div>
+</header>
       <main className="max-w-4xl mx-auto px-6 py-12">
         <form onSubmit={handleSubmit} className="space-y-8">
 
