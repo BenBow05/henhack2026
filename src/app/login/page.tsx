@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Mail, Lock, ArrowLeft } from "lucide-react";
+import { useUser } from "@/components/context/UserContext";
 
 export default function Login() {
 	const router = useRouter();
